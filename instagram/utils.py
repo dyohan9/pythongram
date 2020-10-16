@@ -29,13 +29,12 @@ class Utils:
         except AttributeError:
             parsedData = urllib.quote(data)
 
+        hmac_signature = hmac.new(
+            config.IG_SIG_KEY.encode("utf-8"), data.encode("utf-8"), hashlib.sha256
+        ).hexdigest()
+
         return (
-            "ig_sig_key_version="
-            + config.SIG_KEY_VERSION
-            + "&signed_body="
-            + hmac.new(
-                config.IG_SIG_KEY.encode("utf-8"), data.encode("utf-8"), hashlib.sha256
-            ).hexdigest()
-            + "."
-            + parsedData
+            f"ig_sig_key_version={config.SIG_KEY_VERSION}&signed_body="
+            f"{hmac_signature}."
+            f"{parsedData}"
         )

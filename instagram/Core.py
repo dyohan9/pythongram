@@ -7,8 +7,8 @@ from instagram.modules.User import User
 class Core:
     def __init__(self):
         self.session = requests.Session()
-        self.username = os.environ.get('INSTAGRAM_USERNAME', default=None)
-        self.password = os.environ.get('INSTAGRAM_PASSWORD', default=None)
+        self.username = os.environ.get("INSTAGRAM_USERNAME", default=None)
+        self.password = os.environ.get("INSTAGRAM_PASSWORD", default=None)
         self.user = User(
             session=self.session, username=self.username, password=self.password
         )

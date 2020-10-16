@@ -21,7 +21,7 @@ class Connection:
             }
         )
 
-        if post != None:  # POST
+        if post is not None:  # POST
             response = self.__session.post(
                 config.API_URL + endpoint, data=post
             )  # , verify=False
@@ -30,16 +30,17 @@ class Connection:
 
         if response.status_code == 200:
             self.__last_response = response
-            self.__last_json = json.loads(response.text)
-            return True
+            self.__last_json = response.json()
+            return response.json()
         else:
             # for debugging
             try:
                 self.__last_response = response
                 self.__last_json = json.loads(response.text)
-            except:
-                pass
-            raise Exception("Request return " + str(response.status_code) + " error!")
+            except Exception:
+                raise Exception(
+                    "Request return " + str(response.status_code) + " error!"
+                )
 
     @property
     def get_last_response(self):

@@ -18,13 +18,12 @@ class User(Connection):
         self.uuid = Utils.generateUUID(True)
 
     def search_username(self, username):
-        query = self.send_request("users/" + str(username) + "/usernameinfo/")
+        query = self.send_request(f"users/{username}/usernameinfo/")
         return query
 
     def get_userid_from_username(self, username):
-        self.search_username(username)
-        if "user" in self.get_last_json:
-            return str(self.get_last_json["user"]["pk"])
+        if "user" in self.search_username(username):
+            return str(self.get_last_json.get("user", {}).get("pk"))
         return None  # Not found
 
     def login(self, force=False):
@@ -54,8 +53,10 @@ class User(Connection):
                     post=Utils.generateSignature(json.dumps(data)),
                 ):
                     self.is_logged_in = True
-                    self.user_id = self.get_last_json["logged_in_user"]["pk"]
-                    self.rank_token = "%s_%s" % (self.user_id, self.uuid)
+                    self.user_id = self.get_last_json.get("logged_in_user", {}).get(
+                        "pk"
+                    )
+                    self.rank_token = f"{self.user_id}_{self.uuid}"
                     self.token = self.get_last_response.cookies["csrftoken"]
 
                     print("Login success!")
