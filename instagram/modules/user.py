@@ -1,7 +1,7 @@
 import hashlib
 import json
 
-from instagram.modules.Connection import Connection
+from instagram.modules.connection import Connection
 from instagram.utils import Utils
 
 
@@ -15,7 +15,7 @@ class User(Connection):
         self.rank_token = None
         self.token = None
         self.device_id = None
-        self.uuid = Utils.generateUUID(True)
+        self.uuid = Utils.generate_uuid(True)
 
     def search_username(self, username):
         query = self.send_request(f"users/{username}/usernameinfo/")
@@ -29,17 +29,17 @@ class User(Connection):
     def login(self, force=False):
         m = hashlib.md5()
         m.update(self.username.encode("utf-8") + self.password.encode("utf-8"))
-        self.device_id = Utils.generateDeviceId(m.hexdigest())
+        self.device_id = Utils.generate_devide_id(m.hexdigest())
 
         if not self.is_logged_in or force:
             # if you need proxy make something like this:
             # self.session.proxies = {"https" : "http://proxyip:proxyport"}
             if self.send_request(
-                endpoint=f"si/fetch_headers/?challenge_type=signup&guid={Utils.generateUUID(False)}"
+                endpoint=f"si/fetch_headers/?challenge_type=signup&guid={Utils.generate_uuid(False)}"
             ):
 
                 data = {
-                    "phone_id": Utils.generateUUID(True),
+                    "phone_id": Utils.generate_uuid(True),
                     "_csrftoken": self.get_last_response.cookies["csrftoken"],
                     "username": self.username,
                     "guid": self.uuid,
@@ -50,7 +50,7 @@ class User(Connection):
 
                 if self.send_request(
                     endpoint="accounts/login/",
-                    post=Utils.generateSignature(json.dumps(data)),
+                    post=Utils.generate_signature(json.dumps(data)),
                 ):
                     self.is_logged_in = True
                     self.user_id = self.get_last_json.get("logged_in_user", {}).get(

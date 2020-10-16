@@ -8,7 +8,7 @@ from instagram import config
 
 class Utils:
     @staticmethod
-    def generateUUID(uuid_type):
+    def generate_uuid(uuid_type):
         generated_uuid = str(uuid.uuid4())
         if uuid_type:
             return generated_uuid
@@ -16,14 +16,14 @@ class Utils:
             return generated_uuid.replace("-", "")
 
     @staticmethod
-    def generateDeviceId(seed):
+    def generate_devide_id(seed):
         volatile_seed = "12345"
         m = hashlib.md5()
         m.update(seed.encode("utf-8") + volatile_seed.encode("utf-8"))
         return "android-" + m.hexdigest()[:16]
 
     @staticmethod
-    def generateSignature(data):
+    def generate_signature(data):
         try:
             parsedData = urllib.parse.quote(data)
         except AttributeError:
