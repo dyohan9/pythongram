@@ -1,6 +1,6 @@
 import json
 
-from instagram import config
+from pythongram import config
 
 
 class Connection:

@@ -1,6 +1,6 @@
 import os
 
-from instagram.instagram import Instagram
+from pythongram.pythongram import Instagram
 
 
 if __name__ == "__main__":

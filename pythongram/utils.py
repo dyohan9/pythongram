@@ -3,7 +3,7 @@ import hmac
 import urllib.parse
 import uuid
 
-from instagram import config
+from pythongram import config
 
 
 class Utils:

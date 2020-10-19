@@ -1,6 +1,6 @@
 import requests
 
-from instagram.modules.user import User
+from pythongram.modules.user import User
 
 
 class Instagram:

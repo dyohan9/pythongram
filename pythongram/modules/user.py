@@ -1,8 +1,8 @@
 import hashlib
 import json
 
-from instagram.modules.connection import Connection
-from instagram.utils import Utils
+from pythongram.modules.connection import Connection
+from pythongram.utils import Utils
 
 
 class User(Connection):

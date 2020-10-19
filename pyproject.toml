@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pythongram"
+version = "0.1.0"
+description = "An unofficial Instagram SDK for Python"
+authors = ["Daniel Yohan <dyohan9@gmail.com>"]
+maintainers = [ "Daniel Yohan <dyohan9@gmail.com>",]
+repository = "https://github.com/dyohan9/pythongram"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flake8 = "^3.8.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "19.3b0"
+requests = "~=2.24.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
