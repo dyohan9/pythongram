@@ -11,6 +11,6 @@ services:
 
 install:
   - pip install poetry
-  - poetry install --no-root --dev
+  - poetry install --no-root
 script:
   - flake8
