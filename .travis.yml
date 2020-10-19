@@ -10,7 +10,7 @@ services:
   - docker
 
 install:
-  - pip install pipenv
-  - pipenv install --system --dev
+  - pip install poetry
+  - poetry install --no-root --dev
 script:
   - flake8
